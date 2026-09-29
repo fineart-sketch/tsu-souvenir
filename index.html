@@ -301,6 +301,7 @@ footer a{font-size:14px;color:var(--text-soft);text-decoration:none}
 footer a:hover{color:var(--brand)}
 .foot-bot{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:var(--text-soft);
   display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.foot-bot a{color:inherit;text-decoration:none}.foot-bot a:hover{color:var(--brand);text-decoration:underline}
 
 /* ---------- ลิ้นชักตะกร้า ---------- */
 .overlay{position:fixed;inset:0;background:rgba(20,14,16,.5);backdrop-filter:blur(2px);z-index:90;opacity:0;
@@ -542,7 +543,7 @@ footer a:hover{color:var(--brand)}
     </div>
     <div class="foot-bot">
       <span id="copy">© 2026 ร้านของที่ระลึก มหาวิทยาลัยของคุณ</span>
-      <span>ราคาทั้งหมดเป็นเงินบาท (THB)</span>
+      <span>ราคาทั้งหมดเป็นเงินบาท (THB) · <a id="staffLink" href="#" target="_blank" rel="noopener" hidden>🔒 สำหรับเจ้าหน้าที่</a></span>
     </div>
   </div>
 </footer>
@@ -664,7 +665,8 @@ const CONFIG = {
 
   /* URL ของ Apps Script (deployment แบบสาธารณะ) — ดูวิธีเอามาใน SETUP.md
      ถ้าเว้นว่างไว้ ระบบจะข้ามการส่งออเดอร์เข้าหลังบ้าน แล้วใช้ LINE อย่างเดียว */
-  apiUrl:     "",
+  apiUrl:     "https://script.google.com/macros/s/AKfycbybVuvAR7r120RR2LJUwaupz76qLGqPedrwPQQhkZnLuGuNpmM8zbj4n7uPI8yYnRpfQQ/exec",
+  adminUrl:   "https://script.google.com/a/macros/tsu.ac.th/s/AKfycbypWzHf7fgujOTvqnRf7U06wUYhwuKmNnTJcnGgQ4Z6ts25EKeOTyX0V8KQvYQ6GEUW3Q/exec",  // หน้าแอดมิน (ลิงก์ "สำหรับเจ้าหน้าที่" ท้ายเว็บ)
 
   announce:   "",                        // แถบประกาศบนสุด (เว้นว่าง = ข้อความมาตรฐาน)
   freeShipMin: 1000,                     // ซื้อครบเท่านี้ ส่งลงทะเบียนฟรี
@@ -766,6 +768,7 @@ function applyShopInfo(){
   $('#cPhone').textContent=CONFIG.phone; $('#cLine').textContent=CONFIG.lineId;
   $('#cMail').textContent=CONFIG.email;
   $('#copy').textContent=`© ${new Date().getFullYear()} ${CONFIG.shopName} ${CONFIG.uniName}`;
+  const sl=$('#staffLink'); if(sl){ sl.hidden=!CONFIG.adminUrl; if(CONFIG.adminUrl) sl.href=CONFIG.adminUrl; }
   const ck=$('#toCheckout');
   if(ck){ ck.disabled=!!CONFIG.comingSoon;
     ck.textContent = CONFIG.comingSoon ? `🕒 ${CONFIG.comingSoonText}` : 'ดำเนินการสั่งซื้อ'; }
