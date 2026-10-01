@@ -120,6 +120,9 @@ input,select,textarea{font-family:inherit; font-size:inherit}
 @media (max-width:520px){.logo-mark img:nth-child(3){display:none}.logo-mark .div{display:none}}
 .logo-txt strong{display:block;font-size:15.5px;font-weight:700;line-height:1.25}
 .logo-txt span{display:block;font-size:11.5px;color:var(--text-soft);line-height:1.3}
+.hero .btn{text-decoration:none}
+@media (max-width:520px){.logo-txt{min-width:0}.logo-txt strong,.logo-txt span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+  .cart-btn>span:not(.badge){display:none}}
 .nav{display:flex;gap:4px;margin-left:auto}
 .nav a{padding:8px 14px;border-radius:999px;text-decoration:none;font-size:14.5px;font-weight:600;color:var(--text-soft)}
 .nav a:hover{background:var(--surface-2);color:var(--text)}
@@ -160,6 +163,37 @@ input,select,textarea{font-family:inherit; font-size:inherit}
 .hero-art figure:nth-child(1){transform:translateY(-14px)}
 .hero-art figure:nth-child(4){transform:translateY(14px)}
 .hero-art figcaption{font-size:12.5px;color:var(--text-soft);text-align:center;margin-top:8px}
+/* ---------- ฮีโร่แบบแกลเลอรี (Fine Arts Collective) ---------- */
+.hero.gallery{background:#0f1d2b;color:#fff;padding:76px 0 68px}
+.hero.gallery::before{inset:auto;right:-140px;top:-160px;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(74,138,200,.55) 0,rgba(74,138,200,0) 70%)}
+.hero.gallery::after{content:'';position:absolute;left:-110px;bottom:-190px;width:460px;height:460px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,145,58,.32) 0,rgba(232,145,58,0) 70%);pointer-events:none}
+.hero.gallery .hero-grid{grid-template-columns:1.2fr .8fr;gap:48px;z-index:1}
+.hero.gallery .hero-bar{width:64px;height:6px;border-radius:9px;background:#d13b33;margin-bottom:22px}
+.hero.gallery h1{font-family:'Noto Serif Thai',serif;font-size:clamp(36px,5.4vw,60px);line-height:1.06;letter-spacing:-1px;margin:0;color:#fff}
+.hero.gallery h1 .acc{color:#e8913a}
+.hero.gallery .eyebrow{display:block;background:none;padding:0;border-radius:0;color:#9cc3ea;font-size:clamp(15px,1.7vw,19px);
+  font-weight:600;margin:12px 0 22px}
+.hero.gallery p{color:#c9d4df;font-size:15.5px;line-height:1.85;max-width:62ch;margin:0 0 28px}
+.hero.gallery .btn-primary{background:#e8913a;color:#1b1206}
+.hero.gallery .btn-primary:hover{background:#f0a253}
+.hero.gallery .btn-ghost{background:transparent;border:1.5px solid rgba(255,255,255,.35);color:#fff}
+.hero.gallery .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+.hero.gallery .hero-stats{display:none}
+.hero-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hero-tile{text-align:left;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:16px;
+  padding:18px;color:#fff;transition:.18s;cursor:pointer;font:inherit}
+.hero-tile:hover{background:rgba(255,255,255,.11);transform:translateY(-2px)}
+.hero-tile svg{width:34px;height:34px}
+.hero-tile b{display:block;margin-top:10px;font-size:15.5px}
+.hero-tile small{display:block;color:#a8b8c8;font-size:12.5px;line-height:1.55;margin-top:3px}
+.hero-tile:nth-child(1) svg{color:#6aa6dd}.hero-tile:nth-child(2) svg{color:#e8913a}
+.hero-tile:nth-child(3) svg{color:#e2584f}.hero-tile:nth-child(4) svg{color:#c9d4df}
+@media (max-width:880px){.hero.gallery .hero-grid{grid-template-columns:1fr;gap:30px}.hero.gallery{padding:48px 0 44px}}
+@media (max-width:420px){.hero-tile{padding:14px}.hero-tile small{display:none}}
+.group-note{display:flex;align-items:center;gap:8px;font-size:13.5px;margin:-4px 0 14px;color:var(--text-soft)}
+.group-note button{color:var(--brand);font-weight:600;text-decoration:underline}
 @media (max-width:880px){
   .hero-grid{grid-template-columns:1fr;gap:36px}
   .hero{padding:40px 0 36px}
@@ -438,7 +472,7 @@ footer a:hover{color:var(--brand)}
     <button class="menu-btn" id="menuBtn" aria-label="เมนู">☰</button>
     <nav class="nav" id="nav">
       <a href="#home" data-sec="hero">หน้าแรก</a>
-      <a href="#products" data-sec="products">สินค้า</a>
+      <a href="#products" data-sec="products">ผลงาน</a>
       <a href="#howto" data-sec="howto">วิธีสั่งซื้อ</a>
       <a href="#about" data-sec="about">เกี่ยวกับร้าน</a>
       <a href="#contact" data-sec="about">ติดต่อ</a>
@@ -452,37 +486,45 @@ footer a:hover{color:var(--brand)}
 </header>
 
 <main>
-<section class="hero" id="home">
+<section class="hero gallery" id="home">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow" id="heroEyebrow">✦ ของที่ระลึกอย่างเป็นทางการ · TSU</span>
-      <h1 id="heroTitle">เก็บความทรงจำใต้ร่มปาริชาต ไว้ในสิ่งที่จับต้องได้</h1>
-      <p id="heroText">เสื้อ แก้ว กระเป๋า และของสะสมประจำมหาวิทยาลัยทักษิณ คัดคุณภาพ ปักตราสัญลักษณ์จริง เหมาะเป็นของฝาก ของขวัญรับปริญญา และของที่ระลึกสำหรับศิษย์เก่า</p>
+      <div class="hero-bar"></div>
+      <h1 id="heroTitle">Fine Arts Collective</h1>
+      <span class="eyebrow" id="heroEyebrow">ศิลปกรรมมาร์เก็ตเพลส · คณะศิลปกรรมศาสตร์ มหาวิทยาลัยทักษิณ</span>
+      <p id="heroText">Fine Arts Collective (ศิลปกรรมมาร์เก็ตเพลส) คือศูนย์รวมผลงานศิลป์ ดนตรี และศิลปะการแสดง จากนักศึกษา อาจารย์ และศิษย์เก่าคณะศิลปกรรมศาสตร์ มอบบริการออกแบบการแสดงตามธีมงาน รับประพันธ์บทเพลง งานเทคโนโลยีดนตรีและซาวด์ดีไซน์ ตลอดจนงานจิตรกรรม ประติมากรรม คราฟต์ทำมือ ดิจิทัลอาร์ต และงานดีไซน์สร้างสรรค์ มุ่งส่งต่อคุณค่าทางศิลปวัฒนธรรมและนวัตกรรมสร้างสรรค์ ตรงสู่ผู้ฟัง ผู้ชม ผู้ประกอบการ และนักสะสมทั่วไทย</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#products" id="heroCta1">เลือกซื้อสินค้า →</a>
-        <a class="btn btn-ghost" href="#howto" id="heroCta2">ดูวิธีสั่งซื้อ</a>
+        <a class="btn btn-primary" href="#products" id="heroCta1">ชมผลงานทั้งหมด →</a>
+        <a class="btn btn-ghost" href="#products" id="heroCta2">จ้างงาน / ขอใบเสนอราคา</a>
       </div>
       <div class="hero-stats" id="heroStats">
-        <div><b id="statCount">16</b><span>รายการสินค้า</span></div>
-        <div><b>2</b><span>จุดรับของ สงขลา·พัทลุง</span></div>
-        <div><b>1–3</b><span>วันทำการจัดส่ง</span></div>
+        <div><b id="statCount">30</b><span>ผลงาน</span></div>
       </div>
     </div>
-    <div class="hero-art" id="heroArt"></div>
+    <div class="hero-tiles" id="heroTiles">
+      <button class="hero-tile" data-group="visual"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M50 16c-19 0-34 14-34 31 0 12 9 15 16 13 6-2 9 4 7 9-2 6 4 11 11 11 19 0 34-14 34-32S69 16 50 16z"/><circle cx="34" cy="42" r="4"/><circle cx="46" cy="30" r="4"/><circle cx="62" cy="31" r="4"/><circle cx="70" cy="46" r="4"/></svg>
+        <b>ทัศนศิลป์</b><small>จิตรกรรม ภาพพิมพ์ ประติมากรรม แกะสลัก จิตรกรรมฝาผนัง</small></button>
+      <button class="hero-tile" data-group="music"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M40 70V26l34-8v44"/><circle cx="32" cy="70" r="8"/><circle cx="66" cy="62" r="8"/></svg>
+        <b>ดนตรี</b><small>บทเพลง ทำนอง เพลงบรรเลง เนื้อเพลง</small></button>
+      <button class="hero-tile" data-group="perform"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 22h40v26c0 13-9 22-20 22S18 61 18 48z"/><path d="M29 38h4M43 38h4M30 52c4 4 12 4 16 0"/><path d="M58 34h24v24c0 12-8 20-18 20-4 0-8-1-11-4"/><path d="M66 48h3M74 48h3M67 64c3-3 9-3 12 0"/></svg>
+        <b>ศิลปะการแสดง</b><small>ออกแบบการแสดงตามธีมงาน</small></button>
+      <button class="hero-tile" data-group="custom"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M26 78l7-19 37-37 12 12-37 37z"/><path d="M63 26l12 12"/><path d="M20 84h60"/></svg>
+        <b>งานสั่งทำ</b><small>วาดผนัง ประพันธ์เพลง ซาวด์ดีไซน์ ออกแบบการแสดง</small></button>
+    </div>
   </div>
 </section>
 
 <section class="section" id="products">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="prodTitle">สินค้าทั้งหมด</h2>
-      <p id="prodSub">เลือกหมวดหมู่หรือค้นหาชื่อสินค้าได้เลย ราคารวมค่าปักโลโก้เรียบร้อยแล้ว</p>
+      <h2 id="prodTitle">ผลงานทั้งหมด</h2>
+      <p id="prodSub">เลือกหมวดหรือค้นหาชื่อผลงานได้เลย งานสั่งทำกด "ขอใบเสนอราคา" ได้ทันที</p>
     </div>
     <div class="toolbar">
       <div class="chips" id="chips"></div>
       <div class="search">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <input id="q" type="search" placeholder="ค้นหาสินค้า…" aria-label="ค้นหาสินค้า">
+        <input id="q" type="search" placeholder="ค้นหาผลงาน…" aria-label="ค้นหาผลงาน">
       </div>
     </div>
     <div class="sortbar">
@@ -526,7 +568,7 @@ footer a:hover{color:var(--brand)}
       <div class="section-head"><h2 id="contactTitle">ติดต่อร้าน</h2></div>
       <ul class="info-list">
         <li><div class="info-ic">📍</div><div><b>ที่ตั้งร้าน</b><span id="cAddr">มหาวิทยาลัยทักษิณ วิทยาเขตสงขลา</span></div></li>
-        <li><div class="info-ic">🎒</div><div><b>จุดรับสินค้า</b><span id="cPickup">วิทยาเขตสงขลา และ วิทยาเขตพัทลุง (เลือกได้ตอนสั่งซื้อ)</span></div></li>
+        <li><div class="info-ic">🎒</div><div><b>จุดรับสินค้า</b><span id="cPickup">รับเองที่วิทยาเขตสงขลา หรือจัดส่งพัสดุ (ชำระค่าส่งปลายทาง)</span></div></li>
         <li><div class="info-ic">🕘</div><div><b>เวลาทำการ</b><span id="cHours">จันทร์–ศุกร์ 09:00–16:30 น. (ปิดวันหยุดราชการ)</span></div></li>
         <li><div class="info-ic">📞</div><div><b>โทรศัพท์</b><span id="cPhone">0-7400-0000</span></div></li>
         <li><div class="info-ic">💬</div><div><b>LINE Official</b><span id="cLine">@yourshop</span></div></li>
@@ -549,11 +591,11 @@ footer a:hover{color:var(--brand)}
           </div>
           <div class="logo-txt"><strong id="brandName2">ร้านของที่ระลึก</strong><span id="brandSub2">มหาวิทยาลัยทักษิณ</span></div>
         </div>
-        <p id="footTagline" style="font-size:14px;color:var(--text-soft);margin:0;max-width:38ch">ของที่ระลึกอย่างเป็นทางการ มหาวิทยาลัยทักษิณ · วิทยาเขตสงขลา และ วิทยาเขตพัทลุง</p>
+        <p id="footTagline" style="font-size:14px;color:var(--text-soft);margin:0;max-width:38ch">ศูนย์รวมผลงานศิลป์ ดนตรี และศิลปะการแสดง คณะศิลปกรรมศาสตร์ มหาวิทยาลัยทักษิณ</p>
       </div>
       <div id="footCol1">
         <h4>เมนู</h4>
-        <ul><li><a href="#products">สินค้าทั้งหมด</a></li><li><a href="#howto">วิธีสั่งซื้อ</a></li><li><a href="#about">เกี่ยวกับร้าน</a></li><li><a href="#contact">ติดต่อร้าน</a></li></ul>
+        <ul><li><a href="#products">ผลงานทั้งหมด</a></li><li><a href="#howto">วิธีสั่งซื้อ</a></li><li><a href="#about">เกี่ยวกับร้าน</a></li><li><a href="#contact">ติดต่อร้าน</a></li></ul>
       </div>
       <div id="footCol2">
         <h4>ช่วยเหลือ</h4>
@@ -697,11 +739,11 @@ const CONFIG = {
   comingSoon: true,
   comingSoonText: "เปิดรับสั่งซื้อเร็วๆ นี้",
 
-  uniName:    "มหาวิทยาลัยทักษิณ",
-  shopName:   "ร้านผลงานสร้างสรรค์",
+  uniName:    "Fine Arts Collective · มหาวิทยาลัยทักษิณ",
+  shopName:   "ศิลปกรรมมาร์เก็ตเพลส",
   /* ลำดับหมวดบนหน้าร้าน (หมวดที่ยังไม่มีสินค้าจะถูกซ่อน) — ถ้าต่อหลังบ้านแล้ว แก้จากหน้าแอดมิน */
   categories: ["ภาพวาด (จิตรกรรม)","ภาพพิมพ์","ประติมากรรม","แกะสลัก","วาดผนัง (จิตรกรรมฝาผนัง)",
-               "เสื้อ","ของที่ระลึก","บทเพลงสั้น","ทำนองเพลง","เพลงบรรเลง","เนื้อเพลง"],
+               "เสื้อ","ของที่ระลึก","บทเพลงสั้น","ทำนองเพลง","เพลงบรรเลง","เนื้อเพลง","ศิลปะการแสดง"],
 
   /* ⚠️ ต้องเปลี่ยนเป็นข้อมูลจริงก่อนเปิดขาย */
   promptpay:  "0812345678",              // เบอร์พร้อมเพย์ หรือเลขบัตรประชาชน 13 หลัก
@@ -724,9 +766,7 @@ const CONFIG = {
   orderPrefix: "TSU",                    // คำนำหน้าเลขออเดอร์
   shipping: [
     { id:"pickup_sk", label:"รับเองที่ วิทยาเขตสงขลา",   price:0 },
-    { id:"pickup_pl", label:"รับเองที่ วิทยาเขตพัทลุง",   price:0 },
-    { id:"register",  label:"ไปรษณีย์ลงทะเบียน (3–5 วัน)", price:40 },
-    { id:"ems",       label:"EMS ด่วนพิเศษ (1–2 วัน)",     price:60 }
+    { id:"cod_ship",  label:"จัดส่งพัสดุ — ชำระค่าส่งปลายทาง (COD)", price:0 }
   ]
 };
 
@@ -765,7 +805,8 @@ const PRODUCTS = [
   {"id":"m02","name":"รับแต่งเพลงสั้นสำหรับงาน/หน่วยงาน","cat":"บทเพลงสั้น","price":5000,"icon":"music","sale":"custom","priceMode":"from","artist":"ทีมดนตรีคณะศิลปกรรมศาสตร์","technique":"แต่งคำร้อง ทำนอง เรียบเรียง บันทึกเสียง","dims":"ตามตกลง","desc":"เพลงประจำหน่วยงาน เพลงโฆษณา เพลงงานอีเวนต์"},
   {"id":"m03","name":"ทำนองเพลง \"ลมทะเลสาบ\" (MP3 + โน้ต PDF)","cat":"ทำนองเพลง","price":150,"icon":"melody","sale":"digital","artist":"ชื่อผู้ประพันธ์ (ตัวอย่าง)","technique":"ไฟล์ MP3 + โน้ตเพลง PDF","dims":"ความยาว 2:10 นาที","year":"2568"},
   {"id":"m04","name":"เพลงบรรเลงไทยร่วมสมัย \"สายน้ำ\" (WAV)","cat":"เพลงบรรเลง","price":199,"icon":"music","sale":"digital","artist":"วงดนตรีคณะศิลปกรรมศาสตร์ (ตัวอย่าง)","technique":"ไฟล์ WAV 24bit","dims":"ความยาว 4:05 นาที","year":"2567"},
-  {"id":"m05","name":"เนื้อเพลง \"บ้านใต้\" (PDF)","cat":"เนื้อเพลง","price":300,"icon":"lyrics","sale":"digital","artist":"ชื่อผู้แต่งคำร้อง (ตัวอย่าง)","technique":"ไฟล์ PDF","dims":"2 หน้า","year":"2568","desc":"สิทธิ์การใช้งานเป็นไปตามเงื่อนไขของผู้แต่ง"}
+  {"id":"m05","name":"เนื้อเพลง \"บ้านใต้\" (PDF)","cat":"เนื้อเพลง","price":300,"icon":"lyrics","sale":"digital","artist":"ชื่อผู้แต่งคำร้อง (ตัวอย่าง)","technique":"ไฟล์ PDF","dims":"2 หน้า","year":"2568","desc":"สิทธิ์การใช้งานเป็นไปตามเงื่อนไขของผู้แต่ง"},
+  {"id":"s01","name":"รับออกแบบการแสดงตามธีมงาน","cat":"ศิลปะการแสดง","price":0,"icon":"stage","sale":"custom","priceMode":"ask","artist":"ทีมศิลปะการแสดง คณะศิลปกรรมศาสตร์","technique":"ออกแบบโชว์ ท่าเต้น ดนตรีประกอบ เครื่องแต่งกาย","dims":"ตามขนาดงาน","desc":"งานเปิดตัว งานเลี้ยง งานประชุม งานประเพณี ออกแบบชุดการแสดงให้ตรงธีม"}
 ];
 
 /* ========================= ตั้งแต่บรรทัดนี้เป็นระบบการทำงาน ========================= */
@@ -792,6 +833,7 @@ const ICONS = {
   wall:'<rect x="16" y="22" width="68" height="56" rx="2"/><path d="M16 40h68M16 58h68M38 22v18M62 40v18M38 58v20"/>',
   music:'<path d="M40 70V26l34-8v44"/><circle cx="32" cy="70" r="8"/><circle cx="66" cy="62" r="8"/>',
   melody:'<path d="M16 34h68M16 46h68M16 58h68M16 70h68"/><circle cx="36" cy="58" r="6"/><path d="M42 58V30"/><circle cx="62" cy="46" r="6"/><path d="M68 46V22"/>',
+  stage:'<path d="M18 22h40v26c0 13-9 22-20 22S18 61 18 48z"/><path d="M29 38h4M43 38h4M30 52c4 4 12 4 16 0"/><path d="M58 34h24v24c0 12-8 20-18 20-4 0-8-1-11-4"/><path d="M66 48h3M74 48h3M67 64c3-3 9-3 12 0"/>',
   lyrics:'<rect x="24" y="16" width="52" height="68" rx="5"/><path d="M34 32h32M34 44h32M34 56h20"/><path d="M60 72V58l10-3v12"/><circle cx="57" cy="72" r="3"/>'
 };
 /* ข้อความปลอดภัยสำหรับใส่ใน HTML (ประกาศแบบ function ให้ใช้ได้ตั้งแต่ตอนโหลดหน้า) */
@@ -849,7 +891,7 @@ function applyShopInfo(){
   if(ck){ ck.disabled=!!CONFIG.comingSoon;
     ck.textContent = CONFIG.comingSoon ? `🕒 ${CONFIG.comingSoonText}` : 'ดำเนินการสั่งซื้อ'; }
   $('#announce').textContent = CONFIG.comingSoon ? `🕒 ${CONFIG.comingSoonText} · ตอนนี้ดูสินค้าและราคาได้แล้ว` : CONFIG.announce ||
-    `🎓 ส่งฟรีเมื่อซื้อครบ ${B(CONFIG.freeShipMin)} · รับของเองได้ทั้ง วิทยาเขตสงขลา และ วิทยาเขตพัทลุง`;
+    `🎨 รับเองที่วิทยาเขตสงขลา หรือจัดส่งพัสดุทั่วไทย (ชำระค่าส่งปลายทาง)`;
   const sc=$('#statCount'); if(sc) sc.textContent=PRODUCTS.length;
   // ช่องสถิติที่พิมพ์ว่า {count} จะถูกแทนด้วยจำนวนสินค้าจริงเสมอ
   document.querySelectorAll('#heroStats b').forEach(b=>{
@@ -860,6 +902,7 @@ applyShopInfo();
 
 /* ---- ภาพในฮีโร่ ---- */
 function drawHero(){
+  if(!$('#heroArt')){ accentTitle(); return; }   // หน้าแรกแบบแกลเลอรีไม่มีภาพสินค้า
   const pick=[0, 4, 11, 16].map(i=>PRODUCTS[i]).filter(Boolean);
   while(pick.length<4 && PRODUCTS.length>pick.length) pick.push(PRODUCTS[pick.length]);
   $('#heroArt').innerHTML=pick.slice(0,4).map((p,i)=>
@@ -873,7 +916,14 @@ const SWATCH={'ขาว':'#ffffff','ดำ':'#1c1c1e','ฟ้า':'#0c84c0','�
 const swatch=c=>SWATCH[c]||'#c9ced4';
 
 /* ---- ตัวกรอง / เรียงลำดับ ---- */
-let curCat='ทั้งหมด', curQ='', curSort='pop';
+let curCat='ทั้งหมด', curQ='', curSort='pop', curGroup='';
+/* กลุ่มผลงานบนการ์ดหน้าแรก */
+const GROUPS={
+  visual:{t:'ทัศนศิลป์',f:p=>/ภาพวาด|ภาพพิมพ์|ประติมากรรม|แกะสลัก|วาดผนัง|จิตรกรรม/.test(p.cat)},
+  music:{t:'ดนตรี',f:p=>/เพลง|ทำนอง/.test(p.cat)},
+  perform:{t:'ศิลปะการแสดง',f:p=>/การแสดง/.test(p.cat)},
+  custom:{t:'งานสั่งทำ',f:p=>p.sale==='custom'}
+};
 /** ปุ่มหมวด: เรียงตามที่ร้านตั้งไว้ ซ่อนหมวดที่ยังไม่มีสินค้า หมวดอื่นที่ไม่อยู่ในรายการต่อท้าย */
 function drawChips(){
   const have=new Set(PRODUCTS.map(p=>p.cat));
@@ -884,13 +934,14 @@ function drawChips(){
     `<button class="chip${c===curCat?' on':''}" data-cat="${escH(c)}">${escH(c)}</button>`).join('');
 }
 drawChips();
-$('#chips').onclick=e=>{const b=e.target.closest('.chip'); if(!b)return;
+$('#chips').onclick=e=>{const b=e.target.closest('.chip'); if(!b)return; curGroup='';
   $$('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); curCat=b.dataset.cat; render();};
 $('#q').oninput=e=>{curQ=e.target.value.trim().toLowerCase(); render();};
 $('#sort').onchange=e=>{curSort=e.target.value; render();};
 
 function filtered(){
   let list=PRODUCTS.filter(p=>(curCat==='ทั้งหมด'||p.cat===curCat)&&
+    (!curGroup||curCat!=='ทั้งหมด'||GROUPS[curGroup].f(p))&&
     (!curQ||p.name.toLowerCase().includes(curQ)||p.cat.toLowerCase().includes(curQ)));
   const pv=p=>p.priceMode==='ask'?Infinity:p.price;
   if(curSort==='low')  list=[...list].sort((a,b)=>pv(a)-pv(b));
@@ -901,6 +952,11 @@ function filtered(){
 
 function render(){
   const list=filtered();
+  let gn=$('#groupNote');
+  if(!gn){ gn=document.createElement('div'); gn.id='groupNote'; gn.className='group-note'; $('#grid').before(gn); }
+  gn.hidden=!(curGroup&&curCat==='ทั้งหมด');
+  if(!gn.hidden){ gn.innerHTML='กำลังแสดง: <b>'+GROUPS[curGroup].t+'</b> <button type="button" id="clrGroup">ดูทั้งหมด</button>';
+    $('#clrGroup').onclick=()=>{curGroup=''; render();}; }
   $('#count').textContent = list.length===PRODUCTS.length
     ? `ทั้งหมด ${list.length} รายการ` : `พบ ${list.length} รายการ`;
   if(!list.length){
@@ -1008,7 +1064,7 @@ function paintQuick(){
       ${isCustom(p)?'งานทำตามสั่ง — กรอกรายละเอียดงาน ทางร้านจะติดต่อกลับพร้อมใบเสนอราคา ยังไม่มีค่าใช้จ่าย'
         :isDigital(p)?'ไฟล์ดิจิทัล — หลังชำระเงิน ระบบจะแชร์ไฟล์ให้อีเมล (บัญชี Google) ที่กรอกตอนสั่งซื้อ และส่งลิงก์ดาวน์โหลดทางอีเมลอัตโนมัติ'
         :p.artist?'ผลงานต้นฉบับจากคณะศิลปกรรมศาสตร์ · สอบถามการจัดส่งหรือนัดรับผลงานได้ทาง LINE'
-        :'ปักตราสัญลักษณ์ของแท้ตามระเบียบมหาวิทยาลัย · รับสินค้าเองได้ที่วิทยาเขตสงขลาและพัทลุง'}
+        :'รับเองได้ที่วิทยาเขตสงขลา หรือจัดส่งพัสดุ (ชำระค่าส่งปลายทาง)'}
       ${p.sizes?'<br>ไม่แน่ใจไซซ์? ทักสอบถามทาง LINE ได้ก่อนสั่งซื้อ':''}
     </div>`;
   if(isCustom(p)){ $('#qvReq').onclick=()=>{ $('#quick').classList.remove('on'); openRequest(p.id); }; return; }
@@ -1026,6 +1082,10 @@ function paintQuick(){
     $('#quick').classList.remove('on'); $('#overlay').classList.remove('on');
   };
 }
+$('#heroTiles').onclick=e=>{const t=e.target.closest('.hero-tile'); if(!t) return;
+  curGroup=t.dataset.group; curCat='ทั้งหมด'; drawChips(); render();
+  $('#products').scrollIntoView({behavior:'smooth'});};
+$('#heroCta2').onclick=e=>{e.preventDefault(); openRequest(null);};
 $('#closeQv').onclick=()=>{$('#quick').classList.remove('on'); $('#overlay').classList.remove('on');};
 
 /** ปุ่ม + บนการ์ด: สินค้าที่ไม่มีตัวเลือกใส่ตะกร้าได้เลย ถ้ามีตัวเลือกให้เปิดหน้าต่างเลือกก่อน */
@@ -1086,11 +1146,13 @@ function paint(){
   $('#shipOpts').innerHTML=CONFIG.shipping.map(s=>{
     const free=s.price>0&&sub>=CONFIG.freeShipMin&&s.id==='register';
     return `<label class="ship-opt${shipId===s.id?' on':''}"><input type="radio" name="ship" value="${s.id}" ${shipId===s.id?'checked':''}>
-      <span>${s.label}</span><span class="p">${free?'<span class="free">ฟรี</span>':s.price?B(s.price):'ฟรี'}</span></label>`;
+      <span>${s.label}</span><span class="p">${isCodShip(s)?'จ่ายปลายทาง':free?'<span class="free">ฟรี</span>':s.price?B(s.price):'ฟรี'}</span></label>`;
   }).join('');
   const ship=shipCost(sub);
-  $('#sSub').textContent=B(sub); $('#sShip').textContent=ship?B(ship):'ฟรี'; $('#sTotal').textContent=B(sub+ship);
+  $('#sSub').textContent=B(sub); $('#sShip').textContent=ship?B(ship):(curShipCod()?'ชำระปลายทาง':'ฟรี'); $('#sTotal').textContent=B(sub+ship);
 }
+const isCodShip=s=>!!s&&(String(s.id).indexOf('cod')===0||/ปลายทาง/.test(s.label||''));
+const curShipCod=()=>!allDigital()&&isCodShip(CONFIG.shipping.find(x=>x.id===shipId));
 const hasDigital=()=>cart.some(c=>c.digital), allDigital=()=>cart.length>0&&cart.every(c=>c.digital);
 const needAddr=()=>!allDigital()&&!isPickup();
 function shipCost(sub){
@@ -1251,7 +1313,7 @@ $('#ckForm').onsubmit=async e=>{
     const o=[c.size,c.color].filter(Boolean).join(' · ');
     return `<div class="receipt-row"><span>${c.name}${o?` <small style="color:var(--text-soft)">(${o})</small>`:''} × ${c.qty}</span><b>${B(c.price*c.qty)}</b></div>`;
   }).join('')+
-  `<div class="receipt-row" style="border-top:1px dashed var(--line);margin-top:8px;padding-top:10px"><span>ค่าจัดส่ง — ${lastOrder.shipLabel}</span><b>${ship?B(ship):'ฟรี'}</b></div>
+  `<div class="receipt-row" style="border-top:1px dashed var(--line);margin-top:8px;padding-top:10px"><span>ค่าจัดส่ง — ${lastOrder.shipLabel}</span><b>${ship?B(ship):(/ปลายทาง/.test(lastOrder.shipLabel)?'ชำระปลายทาง':'ฟรี')}</b></div>
    <div class="receipt-row" style="font-size:17px;font-weight:700"><span>ยอดชำระ</span><b style="color:var(--brand)">${B(total)}</b></div>
    <div class="receipt-row" style="border-top:1px dashed var(--line);margin-top:8px;padding-top:10px;color:var(--text-soft);display:block">
      <div>ผู้สั่ง: ${lastOrder.name} · ${lastOrder.tel}</div>
@@ -1291,7 +1353,7 @@ function orderText(){
   const o=lastOrder; if(!o) return '';
   return `📦 คำสั่งซื้อ ${o.no}\n${CONFIG.shopName} ${CONFIG.uniName}\n`+
     `— — — — —\n`+o.items.map(c=>`• ${c.name}${[c.size,c.color].filter(Boolean).length?` (${[c.size,c.color].filter(Boolean).join('/')})`:''} × ${c.qty} = ${B(c.price*c.qty)}`).join('\n')+
-    `\n— — — — —\nค่าจัดส่ง (${o.shipLabel}): ${o.ship?B(o.ship):'ฟรี'}\nยอดชำระ: ${B(o.total)}\n`+
+    `\n— — — — —\nค่าจัดส่ง (${o.shipLabel}): ${o.ship?B(o.ship):(/ปลายทาง/.test(o.shipLabel)?'ชำระปลายทาง':'ฟรี')}\nยอดชำระ: ${B(o.total)}\n`+
     `\nผู้สั่ง: ${o.name}\nโทร: ${o.tel}${o.mail?`\nอีเมล: ${o.mail}`:''}\n`+
     (o.addr?`ที่อยู่: ${o.addr}\n`:'รับสินค้าเองที่ร้าน\n')+
     (o.note?`หมายเหตุ: ${o.note}\n`:'')+`\n(แนบสลิปการโอนในข้อความถัดไปได้เลยครับ)`;
@@ -1322,7 +1384,12 @@ paint();
    ========================================================================== */
 const SEC_EL = { hero:'home', products:'products', howto:'howto', about:'about' };
 
-function setText(id, v){ const el=$('#'+id); if(el && v!=null && v!=='') el.textContent=v; }
+function setText(id, v){ const el=$('#'+id); if(el && v!=null && v!=='') el.textContent=v;
+  if(id==='heroTitle') accentTitle(); }
+/** ทำสีส้มให้คำสุดท้ายของหัวข้อใหญ่ (เช่น "Collective") */
+function accentTitle(){ const el=$('#heroTitle'); if(!el) return;
+  const t=el.textContent.trim(), k=t.lastIndexOf(' ');
+  if(k>0) el.innerHTML=escH(t.slice(0,k))+' <span class="acc">'+escH(t.slice(k+1))+'</span>'; }
 
 function applyPage(pg){
   if(!pg) return;
@@ -1346,7 +1413,8 @@ function applyPage(pg){
       const url = (i%2===0) ? pg.logos.a : pg.logos.b;
       if(url) im.src=url;
     });
-    if(pg.logos.b===''){ document.querySelectorAll('.logo-mark img:nth-child(3),.logo-mark .div')
+    // ซ่อนโลโก้ที่ 2 เฉพาะเมื่อตั้งใจปิด (ค่าว่าง = ใช้ไฟล์โลโก้เดิมในโฟลเดอร์ images)
+    if(pg.logos.b==='none'){ document.querySelectorAll('.logo-mark img:nth-child(3),.logo-mark .div')
       .forEach(e=>e.style.display='none'); }
   }
 
@@ -1482,8 +1550,8 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;',
 /* ============================ ขอใบเสนอราคา ============================ */
 let reqPid=null;
 function openRequest(pid){
-  const p=PRODUCTS.find(x=>x.id===pid); if(!p) return;
-  reqPid=pid;
+  const p=pid?PRODUCTS.find(x=>x.id===pid):{id:'',name:'จ้างงาน / สอบถามงานสั่งทำ (ทั่วไป)'}; if(!p) return;
+  reqPid=pid||'';
   $('#reqFor').textContent='งานที่สนใจ: '+p.name+(p.priceMode==='from'?' (เริ่มต้น '+B(p.price)+')':'');
   $('#reqForm').hidden=false; $('#reqDone').hidden=true;
   $$('#reqForm .field').forEach(f=>f.classList.remove('bad'));
@@ -1493,7 +1561,7 @@ const closeReq=()=>{ $('#reqModal').classList.remove('on'); $('#overlay').classL
 $('#closeReq').onclick=closeReq; $('#reqClose2').onclick=closeReq;
 $('#reqForm').onsubmit=async e=>{
   e.preventDefault();
-  const p=PRODUCTS.find(x=>x.id===reqPid)||{};
+  const p=PRODUCTS.find(x=>x.id===reqPid)||{id:'',name:'จ้างงาน / สอบถามงานสั่งทำ (ทั่วไป)'};
   const need=[['#rName',v=>v.trim().length>1],['#rTel',v=>/^0\d{8,9}$/.test(v.replace(/\D/g,''))],['#rDetail',v=>v.trim().length>4]];
   const mail=$('#rMail').value.trim();
   let ok=true;
