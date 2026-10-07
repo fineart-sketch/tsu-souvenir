@@ -559,10 +559,10 @@ footer a:hover{color:var(--brand)}
 <section class="section about" id="about">
   <div class="wrap two-col">
     <div>
-      <div class="section-head"><h2 id="aboutTitle">เกี่ยวกับร้าน</h2></div>
-      <p id="aboutText" style="color:var(--text-soft)">ร้านของที่ระลึกมหาวิทยาลัยทักษิณ จำหน่ายสินค้าที่ใช้ตราสัญลักษณ์อย่างถูกต้องตามระเบียบของมหาวิทยาลัย รายได้ส่วนหนึ่งนำไปสนับสนุนกิจกรรมนิสิต</p>
-      <p id="aboutText2" style="color:var(--text-soft)">มีสินค้าทั้งของมหาวิทยาลัยและของคณะศิลปกรรมศาสตร์ รับผลิตของที่ระลึกจำนวนมากสำหรับคณะ ชมรม และงานประชุมวิชาการ สอบถามราคาพิเศษได้ที่ช่องทางติดต่อ</p>
-      <div class="note" id="aboutNote">📌 <b>สำหรับศิษย์เก่า:</b> แจ้งรหัสนิสิตตอนสั่งซื้อในช่องหมายเหตุ รับส่วนลดพิเศษ 10%</div>
+      <div class="section-head"><h2 id="aboutTitle">เกี่ยวกับ Fine Arts Collective</h2></div>
+      <p id="aboutText" style="color:var(--text-soft)">Fine Arts Collective (ศิลปกรรมมาร์เก็ตเพลส) คือพื้นที่ออนไลน์ของคณะศิลปกรรมศาสตร์ มหาวิทยาลัยทักษิณ ที่รวบรวมผลงานศิลป์ ดนตรี และศิลปะการแสดง จากนักศึกษา อาจารย์ และศิษย์เก่า มาไว้ในที่เดียว ให้ผู้ฟัง ผู้ชม ผู้ประกอบการ และนักสะสมทั่วไทยเข้าถึงได้ง่าย</p>
+      <p id="aboutText2" style="color:var(--text-soft)">นอกจากผลงานพร้อมขาย ทั้งจิตรกรรม ภาพพิมพ์ ประติมากรรม งานแกะสลัก คราฟต์ทำมือ ดิจิทัลอาร์ต และผลงานดนตรีแบบไฟล์ดิจิทัล เรายังรับงานสั่งทำ ได้แก่ ออกแบบการแสดงตามธีมงาน ประพันธ์บทเพลง งานเทคโนโลยีดนตรีและซาวด์ดีไซน์ จิตรกรรมฝาผนัง และงานดีไซน์สร้างสรรค์ เพียงกดปุ่ม "ขอใบเสนอราคา" แล้วเล่าความต้องการ ทีมงานจะติดต่อกลับ</p>
+      <div class="note" id="aboutNote">📌 รับผลงานเองได้ที่วิทยาเขตสงขลา หรือจัดส่งพัสดุทั่วไทย (ชำระค่าส่งปลายทาง) · ไฟล์เพลงส่งทางอีเมลหลังชำระเงิน</div>
     </div>
     <div id="contact">
       <div class="section-head"><h2 id="contactTitle">ติดต่อร้าน</h2></div>
@@ -1106,6 +1106,9 @@ function addToCart(pid,o,qty){
   if(isCustom(p)||p.priceMode==='ask'){ openQuick(pid); return; }
   const k=keyOf(pid,o), hit=cart.find(c=>c.key===k);
   if(hit&&isDigital(p)){ toast('ไฟล์นี้อยู่ในตะกร้าแล้ว (ซื้อครั้งละ 1 สิทธิ์)','ดูตะกร้า',openCart); return; }
+  const inCart=cart.filter(c=>c.id===pid).reduce((s,c)=>s+c.qty,0);
+  if(p.stock!=null&&p.stock!==''&&inCart+qty>p.stock){
+    toast(p.stock>0?`“${p.name}” มีเพียง ${p.stock} ชิ้น`:`“${p.name}” หมดแล้ว`,'ดูตะกร้า',openCart); return; }
   if(hit) hit.qty+=qty;
   else cart.push({key:k,id:pid,name:p.name,price:p.price,icon:p.icon,img:p.img,
     size:o.size||null,color:o.color||null,qty:isDigital(p)?1:qty,digital:isDigital(p)});
@@ -1166,7 +1169,10 @@ $('#cartBody').onclick=e=>{
   if(rm){cart=cart.filter(c=>c.key!==rm.dataset.rm); paint(); return;}
   const q=e.target.closest('[data-d]');
   if(q){const c=cart.find(x=>x.key===q.dataset.k); if(!c)return;
-    c.qty+= +q.dataset.d; if(c.qty<1) cart=cart.filter(x=>x.key!==c.key); paint();}
+    const p=PRODUCTS.find(x=>x.id===c.id), d=+q.dataset.d;
+    if(d>0&&p&&p.stock!=null&&p.stock!==''&&cart.filter(x=>x.id===c.id).reduce((s,x)=>s+x.qty,0)+1>p.stock){
+      toast(`“${p.name}” มีเพียง ${p.stock} ชิ้น`); return; }
+    c.qty+=d; if(c.qty<1) cart=cart.filter(x=>x.key!==c.key); paint();}
 };
 $('#shipOpts').onchange=e=>{shipId=e.target.value; paint();};
 
@@ -1244,7 +1250,7 @@ $('#ckForm').onsubmit=async e=>{
   const btn=$('#ckForm button[type=submit]');
 
   lastOrder={d,sub,ship,total:sub+ship,pay:document.querySelector('input[name="pay"]:checked').value,
-    name:$('#fName').value.trim(),tel:$('#fTel').value.trim(),mail,addr:$('#fAddr').value.trim(),
+    name:$('#fName').value.trim(),tel:$('#fTel').value.trim(),mail,addr:needAddr()?$('#fAddr').value.trim():'',
     note:$('#fNote').value.trim(),shipLabel:allDigital()?'ไฟล์ดิจิทัล (ส่งทางอีเมล)':shipObj.label,items:[...cart],
     no:`${CONFIG.orderPrefix}-${String(d.getFullYear()).slice(2)}${pad(d.getMonth()+1)}${pad(d.getDate())}-${Math.floor(1000+Math.random()*9000)}`,
     synced:false};
