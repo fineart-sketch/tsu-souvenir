@@ -1260,32 +1260,42 @@ $('#ckForm').onsubmit=async e=>{
      เพื่อให้ตรวจเงินเข้าอัตโนมัติได้ ถ้าส่งไม่สำเร็จก็ยังสั่งซื้อต่อได้ผ่าน LINE */
   if(CONFIG.apiUrl){
     btn.disabled=true; btn.textContent='กำลังบันทึกคำสั่งซื้อ…';
-    try{
-      const res=await fetch(CONFIG.apiUrl,{
-        method:'POST', redirect:'follow',
-        headers:{'Content-Type':'text/plain;charset=utf-8'},   // เลี่ยง preflight CORS
-        body:JSON.stringify({action:'createOrder',order:{
+    const payload=JSON.stringify({action:'createOrder',order:{
           name:lastOrder.name, tel:lastOrder.tel, email:mail, addr:lastOrder.addr,
           note:lastOrder.note, pay:lastOrder.pay,
           shipLabel:shipObj.label, shipId:shipObj.id,
           shipCost:ship, subtotal:sub,
-          clientRef:lastOrder.no,          // กันสั่งซ้ำตอนเน็ตหลุดแล้วกดใหม่
+          clientRef:lastOrder.no,          // กันสั่งซ้ำ — ส่งซ้ำด้วยเลขนี้ ระบบจะคืนใบเดิม ไม่สร้างใหม่
           items:cart.map(c=>({id:c.id,name:c.name,price:c.price,qty:c.qty,size:c.size,color:c.color}))
-        }})
-      });
-      const data=await res.json();
-      if(data && data.ok){
-        lastOrder.no=data.orderNo;
-        lastOrder.total=data.total;      // ยอดจริงคิดจากราคาในชีต ไม่ใช่จากเบราว์เซอร์
-        lastOrder.synced=true;
+        }});
+    /* ส่งได้สูงสุด 4 ครั้ง (เน็ตหลุด/ระบบตอบช้า) — ใช้เลขอ้างอิงเดิมทุกครั้ง จึงไม่เกิดออเดอร์ซ้ำ */
+    for(let attempt=1; attempt<=4 && !lastOrder.synced; attempt++){
+      if(attempt>1){
+        btn.textContent=`กำลังบันทึกคำสั่งซื้อ… (ลองใหม่ครั้งที่ ${attempt-1})`;
+        await new Promise(r=>setTimeout(r,1500*attempt));
       }
-      else if(data && data.error){
-        btn.disabled=false; btn.textContent='ยืนยันคำสั่งซื้อ';
-        alert(data.error+'\n\nกรุณาตรวจตะกร้าอีกครั้ง (ระบบดึงราคาและสต็อกล่าสุดให้แล้ว)');
-        loadCatalog();
-        return;
-      }
-    }catch(err){ /* ปล่อยผ่าน ใช้ค่าที่สร้างไว้ในเครื่องแทน */ }
+      try{
+        const ctl=new AbortController(), timer=setTimeout(()=>ctl.abort(),45000);
+        const res=await fetch(CONFIG.apiUrl,{
+          method:'POST', redirect:'follow', signal:ctl.signal,
+          headers:{'Content-Type':'text/plain;charset=utf-8'},   // เลี่ยง preflight CORS
+          body:payload
+        });
+        clearTimeout(timer);
+        const data=await res.json();
+        if(data && data.ok){
+          lastOrder.no=data.orderNo;
+          lastOrder.total=data.total;      // ยอดจริงคิดจากราคาในชีต ไม่ใช่จากเบราว์เซอร์
+          lastOrder.synced=true;
+        }
+        else if(data && data.error){
+          btn.disabled=false; btn.textContent='ยืนยันคำสั่งซื้อ';
+          alert(data.error+'\n\nกรุณาตรวจตะกร้าอีกครั้ง (ระบบดึงราคาและสต็อกล่าสุดให้แล้ว)')
+          loadCatalog();
+          return;
+        }
+      }catch(err){ /* เน็ตหลุดหรือตอบช้า — วนส่งใหม่ด้วยเลขอ้างอิงเดิม */ }
+    }
     btn.disabled=false; btn.textContent='ยืนยันคำสั่งซื้อ';
   }
 
