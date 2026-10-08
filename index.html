@@ -804,39 +804,8 @@ const CONFIG = {
    img: ใส่ path รูปจริงได้เลย เช่น img:"images/tshirt.jpg"
         ถ้าไม่ใส่ ระบบจะวาดรูปตัวอย่างจาก icon ให้อัตโนมัติ
    -------------------------------------------------------------------------- */
-const PRODUCTS = [
-  {"id":"a01","name":"ภาพวาดสีน้ำมัน \"ทะเลสาบสงขลายามเย็น\"","cat":"ภาพวาด (จิตรกรรม)","price":8500,"icon":"painting","stock":1,"tag":"ชิ้นเดียว","artist":"ชื่อศิลปิน (ตัวอย่าง)","technique":"สีน้ำมันบนผ้าใบ","dims":"60 × 80 ซม.","year":"2568","desc":"ผลงานตัวอย่าง — แสงสุดท้ายของวันเหนือทะเลสาบสงขลา"},
-  {"id":"a02","name":"รับวาดภาพเหมือน (Portrait)","cat":"ภาพวาด (จิตรกรรม)","price":3000,"icon":"painting","sale":"custom","priceMode":"from","artist":"ทีมศิลปินคณะศิลปกรรมศาสตร์","technique":"สีน้ำมัน / สีอะคริลิก / สีน้ำ","dims":"ตามตกลง","desc":"วาดจากรูปถ่าย ราคาขึ้นกับขนาดและจำนวนคน"},
-  {"id":"a03","name":"ภาพพิมพ์แกะไม้ \"ปาริชาต\" (Edition 3/20)","cat":"ภาพพิมพ์","price":2500,"icon":"print","stock":5,"artist":"ชื่อศิลปิน (ตัวอย่าง)","technique":"ภาพพิมพ์แกะไม้บนกระดาษสา","dims":"40 × 50 ซม.","year":"2568","desc":"พิมพ์จำนวนจำกัด 20 ชุด มีลายเซ็นศิลปิน"},
-  {"id":"a04","name":"ประติมากรรมดินเผา \"แม่และลูก\"","cat":"ประติมากรรม","price":12000,"icon":"sculpture","stock":1,"tag":"ชิ้นเดียว","artist":"ชื่อศิลปิน (ตัวอย่าง)","technique":"ดินเผาเคลือบ","dims":"สูง 45 ซม.","year":"2567","desc":"ผลงานตัวอย่าง"},
-  {"id":"a05","name":"งานแกะสลักไม้ลายดอกปาริชาต","cat":"แกะสลัก","price":3500,"icon":"carve","stock":2,"artist":"ชื่อศิลปิน (ตัวอย่าง)","technique":"ไม้สักแกะสลัก","dims":"30 × 30 ซม.","year":"2568"},
-  {"id":"a06","name":"รับวาดภาพจิตรกรรมฝาผนัง","cat":"วาดผนัง (จิตรกรรมฝาผนัง)","price":0,"icon":"wall","sale":"custom","priceMode":"ask","artist":"ทีมศิลปินคณะศิลปกรรมศาสตร์","technique":"สีอะคริลิกสำหรับผนัง","dims":"ตามพื้นที่จริง","desc":"รับงานผนังร้านค้า สำนักงาน โรงเรียน ประเมินราคาหลังดูพื้นที่"},
-  {"id":"p01","name":"เสื้อยืดคอกลม ตรามหาวิทยาลัยทักษิณ","cat":"เสื้อ","price":350,"icon":"tshirt","old":420,"tag":"ขายดี","sizes":["S","M","L","XL","2XL"],"colors":["ขาว","ฟ้า","เทา"]},
-  {"id":"p02","name":"เสื้อโปโลปักตรา TSU","cat":"เสื้อ","price":590,"icon":"polo","sizes":["S","M","L","XL","2XL"],"colors":["ขาว","ฟ้า","เทา"]},
-  {"id":"p03","name":"เสื้อแจ็คเก็ตกันลม TSU","cat":"เสื้อ","price":890,"icon":"polo","tag":"ใหม่","sizes":["M","L","XL","2XL"],"colors":["ฟ้า","เทา"]},
-  {"id":"p16","name":"เสื้อยืดคณะศิลปกรรมศาสตร์","cat":"เสื้อ","price":390,"icon":"tshirt","tag":"ใหม่","sizes":["S","M","L","XL","2XL"],"colors":["ขาว","ดำ","แดง"]},
-  {"id":"p04","name":"หมวกแก๊ปปักตรามหาวิทยาลัย","cat":"ของที่ระลึก","price":290,"icon":"cap","colors":["ขาว","ฟ้า","เทา"]},
-  {"id":"p05","name":"แก้วเซรามิกพิมพ์ตรามหาวิทยาลัย","cat":"ของที่ระลึก","price":250,"icon":"mug","tag":"ขายดี"},
-  {"id":"p06","name":"กระบอกน้ำสเตนเลสเก็บอุณหภูมิ TSU","cat":"ของที่ระลึก","price":450,"icon":"bottle","old":520,"colors":["เงิน","ฟ้า"]},
-  {"id":"p07","name":"กระเป๋าผ้าแคนวาสสะพายข้าง","cat":"ของที่ระลึก","price":220,"icon":"bag"},
-  {"id":"p08","name":"ร่มพับ 3 ตอน ตรามหาวิทยาลัย","cat":"ของที่ระลึก","price":320,"icon":"umbrella"},
-  {"id":"p09","name":"สมุดโน้ตปกแข็ง A5 ลายปาริชาต","cat":"ของที่ระลึก","price":150,"icon":"note"},
-  {"id":"p10","name":"ปากกาโลหะสลัก THAKSIN UNIVERSITY","cat":"ของที่ระลึก","price":65,"icon":"pen"},
-  {"id":"p11","name":"แฟ้มเอกสารพร้อมสายคล้องบัตร TSU","cat":"ของที่ระลึก","price":180,"icon":"lanyard"},
-  {"id":"p12","name":"พวงกุญแจอะคริลิกดอกปาริชาต","cat":"ของที่ระลึก","price":89,"icon":"key","tag":"ขายดี"},
-  {"id":"p13","name":"เข็มกลัดโลหะตรามหาวิทยาลัย","cat":"ของที่ระลึก","price":120,"icon":"pin"},
-  {"id":"p14","name":"เซ็ตสติกเกอร์ 12 ลาย TSU","cat":"ของที่ระลึก","price":60,"icon":"sticker"},
-  {"id":"p15","name":"กรอบรูปวันรับปริญญา","cat":"ของที่ระลึก","price":390,"icon":"frame"},
-  {"id":"p17","name":"ถุงผ้าแคนวาสคณะศิลปกรรมศาสตร์","cat":"ของที่ระลึก","price":250,"icon":"bag"},
-  {"id":"p18","name":"ชุดโปสการ์ดผลงานนิสิตศิลปกรรม","cat":"ของที่ระลึก","price":120,"icon":"sticker"},
-  {"id":"p19","name":"ตุ๊กตามาสคอตคณะศิลปกรรมศาสตร์","cat":"ของที่ระลึก","price":490,"icon":"doll","stock":0},
-  {"id":"m01","name":"บทเพลงสั้น \"ใต้ร่มปาริชาต\" (MP3)","cat":"บทเพลงสั้น","price":99,"icon":"music","tag":"ใหม่","sale":"digital","artist":"ชื่อผู้ประพันธ์ (ตัวอย่าง)","technique":"ไฟล์ MP3 320kbps","dims":"ความยาว 1:30 นาที","year":"2568","desc":"ใส่ไฟล์ตัวอย่างเสียงและไฟล์ดาวน์โหลดได้ในหน้าแอดมิน"},
-  {"id":"m02","name":"รับแต่งเพลงสั้นสำหรับงาน/หน่วยงาน","cat":"บทเพลงสั้น","price":5000,"icon":"music","sale":"custom","priceMode":"from","artist":"ทีมดนตรีคณะศิลปกรรมศาสตร์","technique":"แต่งคำร้อง ทำนอง เรียบเรียง บันทึกเสียง","dims":"ตามตกลง","desc":"เพลงประจำหน่วยงาน เพลงโฆษณา เพลงงานอีเวนต์"},
-  {"id":"m03","name":"ทำนองเพลง \"ลมทะเลสาบ\" (MP3 + โน้ต PDF)","cat":"ทำนองเพลง","price":150,"icon":"melody","sale":"digital","artist":"ชื่อผู้ประพันธ์ (ตัวอย่าง)","technique":"ไฟล์ MP3 + โน้ตเพลง PDF","dims":"ความยาว 2:10 นาที","year":"2568"},
-  {"id":"m04","name":"เพลงบรรเลงไทยร่วมสมัย \"สายน้ำ\" (WAV)","cat":"เพลงบรรเลง","price":199,"icon":"music","sale":"digital","artist":"วงดนตรีคณะศิลปกรรมศาสตร์ (ตัวอย่าง)","technique":"ไฟล์ WAV 24bit","dims":"ความยาว 4:05 นาที","year":"2567"},
-  {"id":"m05","name":"เนื้อเพลง \"บ้านใต้\" (PDF)","cat":"เนื้อเพลง","price":300,"icon":"lyrics","sale":"digital","artist":"ชื่อผู้แต่งคำร้อง (ตัวอย่าง)","technique":"ไฟล์ PDF","dims":"2 หน้า","year":"2568","desc":"สิทธิ์การใช้งานเป็นไปตามเงื่อนไขของผู้แต่ง"},
-  {"id":"s01","name":"รับออกแบบการแสดงตามธีมงาน","cat":"ศิลปะการแสดง","price":0,"icon":"stage","sale":"custom","priceMode":"ask","artist":"ทีมศิลปะการแสดง คณะศิลปกรรมศาสตร์","technique":"ออกแบบโชว์ ท่าเต้น ดนตรีประกอบ เครื่องแต่งกาย","dims":"ตามขนาดงาน","desc":"งานเปิดตัว งานเลี้ยง งานประชุม งานประเพณี ออกแบบชุดการแสดงให้ตรงธีม"}
-];
+const PRODUCTS = [];   // รายการผลงานโหลดจากหลังบ้านเสมอ (แก้ได้ที่หน้าแอดมิน แท็บ "สินค้า")
+let CATALOG_STATE = 'loading';   // loading | ok | error
 
 /* ========================= ตั้งแต่บรรทัดนี้เป็นระบบการทำงาน ========================= */
 const ICONS = {
@@ -989,7 +958,10 @@ function render(){
   $('#count').textContent = list.length===PRODUCTS.length
     ? `ทั้งหมด ${list.length} รายการ` : `พบ ${list.length} รายการ`;
   if(!list.length){
-    $('#grid').innerHTML='<div class="empty">ไม่พบสินค้าที่ตรงกับคำค้นหา<br>ลองเปลี่ยนคำค้นหรือเลือกหมวดอื่นดูนะครับ</div>';
+    $('#grid').innerHTML = PRODUCTS.length ? '<div class="empty">ไม่พบสินค้าที่ตรงกับคำค้นหา<br>ลองเปลี่ยนคำค้นหรือเลือกหมวดอื่นดูนะครับ</div>'
+      : CATALOG_STATE==='loading' ? '<div class="empty">กำลังโหลดผลงาน…</div>'
+      : CATALOG_STATE==='error' ? '<div class="empty">โหลดรายการผลงานไม่สำเร็จ<br>กรุณารีเฟรชหน้านี้อีกครั้ง</div>'
+      : '<div class="empty">ยังไม่มีผลงานในร้านขณะนี้<br>ติดตามผลงานใหม่ได้เร็ว ๆ นี้</div>';
     return;
   }
   $('#grid').innerHTML=list.map(p=>{
@@ -1538,11 +1510,12 @@ async function loadCatalog(){
   try{
     const res=await fetch(CONFIG.apiUrl+'?action=catalog',{redirect:'follow'});
     const d=await res.json();
-    if(!d||!d.ok||!d.catalog) return;
+    if(!d||!d.ok||!d.catalog){ if(CATALOG_STATE==='loading'){ CATALOG_STATE='error'; render(); } return; }
     saveCatalogCache(d.catalog);
     applyCatalog(d.catalog);
   }catch(err){
-    // หลังบ้านไม่ตอบ — ใช้ข้อมูลจากแคช/ที่ฝังในไฟล์ต่อไป
+    // หลังบ้านไม่ตอบ — ใช้ข้อมูลจากแคชในเครื่องต่อไป (ถ้ามี)
+    if(CATALOG_STATE==='loading'){ CATALOG_STATE='error'; render(); }
     console.warn('โหลดข้อมูลจากหลังบ้านไม่สำเร็จ:', err && err.message ? err.message : err);
   }
 }
@@ -1550,7 +1523,8 @@ async function loadCatalog(){
 function applyCatalog(c){
   {
 
-    if(Array.isArray(c.products)&&c.products.length){
+    if(Array.isArray(c.products)){
+      CATALOG_STATE='ok';
       PRODUCTS.length=0;
       c.products.forEach(p=>PRODUCTS.push({
         id:p.id, name:p.name, cat:p.cat||'ทั่วไป',
